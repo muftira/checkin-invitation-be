@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
+const cors = require("cors");
 const app = express();
 
 //get data in JSON format
@@ -9,6 +10,9 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 //port
 const PORT = process.env.PORT || 5500;
+
+// use cors
+app.use(cors());
 
 //import routes
 const GuestItemRoute = require("./routes/guestItems");
