@@ -48,6 +48,8 @@ router.get("/api/guest", async (req, res) => {
 
 //update data
 router.put("/api/guest/:id", async (req, res) => {
+  const id = req.params.id
+  const {name, address, isArrived, isSpread} = req.body
   try {
     const stamp = new Date();
     const d = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
@@ -63,8 +65,7 @@ router.put("/api/guest/:id", async (req, res) => {
     const _date = `${day}, ${date}-${month}-${year}`;
     const _time = `${hour}:${minute}:${second}`
     const guest = await guestItemModel
-      .findByIdAndUpdate({ _id: req.params.id }, req.body)
-      .updateMany({ date: _date }, {time: _time});
+      .findByIdAndUpdate(id, {name, address, date: _date , time: _time, isArrived, isSpread})
     res.json("Guest Updated");
   } catch (error) {
     res.json(error);
