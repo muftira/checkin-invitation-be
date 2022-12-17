@@ -38,6 +38,8 @@ router.post("/api/guest", async (req, res) => {
 
 //get data
 router.get("/api/guest", async (req, res) => {
+  const name = req.query.name
+  const address = req.query.address
   try {
     const allGuestItems = await guestItemModel.find({});
     res.status(200).json(allGuestItems);
